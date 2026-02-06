@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: bst-backend
+    env: node
+    repo: https://github.com/HarshYadv5554/Harsh_BST.git
+    branch: main
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+
+  - type: static
+    name: bst-frontend
+    repo: https://github.com/HarshYadv5554/Harsh_BST.git
+    branch: main
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
