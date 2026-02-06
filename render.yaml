@@ -13,6 +13,11 @@ services:
     repo: https://github.com/HarshYadv5554/Harsh_BST.git
     branch: main
     rootDir: frontend
-    # Ensure devDependencies (like Vite) are installed during the build
-    buildCommand: npm install --include=dev && npm run build
+    # Use npm ci for reproducible builds and ensure devDependencies
+    buildCommand: npm ci && npm run build
     publishPath: dist
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: VITE_API_BASE_URL
+        value: https://bst-backend.onrender.com
