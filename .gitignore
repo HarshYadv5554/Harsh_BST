@@ -1,0 +1,17 @@
+# Node modules and build outputs
+node_modules/
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Ignore large media files
+Harsh_BST_Visualiser.mp4
+*.mp4
