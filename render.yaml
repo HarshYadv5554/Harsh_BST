@@ -13,5 +13,6 @@ services:
     repo: https://github.com/HarshYadv5554/Harsh_BST.git
     branch: main
     rootDir: frontend
-    buildCommand: npm install && npm run build
+    # Ensure devDependencies (like Vite) are installed during the build
+    buildCommand: npm install --include=dev && npm run build
     publishPath: dist
