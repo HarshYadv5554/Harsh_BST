@@ -13,8 +13,8 @@ services:
     repo: https://github.com/HarshYadv5554/Harsh_BST.git
     branch: main
     rootDir: frontend
-    # Use npm ci for reproducible builds and ensure devDependencies
-    buildCommand: npm ci && npm run build
+    # Use npm exec to safely run vite; no permission issues with this approach
+    buildCommand: npm ci && npm exec -- vite build
     publishPath: dist
     envVars:
       - key: NODE_ENV
