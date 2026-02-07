@@ -7,14 +7,16 @@ services:
     rootDir: backend
     buildCommand: npm install
     startCommand: npm start
+    envVars:
+      - key: CLIENT_URL
+        value: https://bst-frontend.onrender.com
 
   - type: static
     name: bst-frontend
     repo: https://github.com/HarshYadv5554/Harsh_BST.git
     branch: main
     rootDir: frontend
-    # Use direct path to vite binary for guaranteed execution on Render
-    buildCommand: npm ci && ./node_modules/.bin/vite build
+    buildCommand: npm ci && npm run build
     publishPath: dist
     envVars:
       - key: NODE_ENV
