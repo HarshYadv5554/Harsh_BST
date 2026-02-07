@@ -6,9 +6,22 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 
-// CORS configuration: allow requests from frontend
+// Normalize URLs (no trailing slash) for comparison
+const allowedOrigins = CLIENT_URL.split(',')
+  .map((s) => s.trim().replace(/\/$/, ''))
+  .filter(Boolean);
+if (allowedOrigins.length === 0) allowedOrigins.push('http://localhost:5173');
+
+// CORS: allow frontend URL(s) from env (Render sets CLIENT_URL to your static site URL)
 app.use(cors({
-  origin: CLIENT_URL,
+  origin: (origin, cb) => {
+    const noOrigin = !origin; // same-origin or tools like Postman
+    const allowed = noOrigin || allowedOrigins.some((url) => {
+      const o = (origin || '').replace(/\/$/, '');
+      return o === url || o === url.replace(/\/$/, '');
+    });
+    cb(null, allowed ? (origin || allowedOrigins[0]) : false);
+  },
   credentials: true,
   methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
